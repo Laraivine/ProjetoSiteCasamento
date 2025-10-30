@@ -1,0 +1,36 @@
+.corpo_site{
+ margin: 0;
+}
+
+.fundo{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 190vh;
+width: 100%;
+text-align: center;
+background-color: rgb(193, 163, 221);
+margin: 0;
+padding: 0;
+overflow: hidden;
+color: aliceblue;
+}
+
+.menu{
+text-align: center;
+color:rgb(66, 33, 97);
+background-color: rgb(255, 255, 255);
+padding: 30px;
+width: auto;
+height: 30px;
+justify-content: space-around;
+align-items: center;
+display: flex;
+}
+
+.imagem{
+width: 2000px;
+height: 800px;
+justify-content: center;
+}
