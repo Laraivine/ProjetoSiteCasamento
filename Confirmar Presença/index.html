@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "eAZGTiwy6gWHSmOZ1",
+        });
+    })();
+    </script>
+</head>
+<body class="corpo_site">
+    
+    <div class="fundo_presenca">
+        <p>CONFIRME SUA PRESENÇA</p>
+        
+        <div class="confirmar_presenca">
+            <form action="#" method="post" id="form">
+                
+                <label for="nome">Nome completo:</label>
+                <input type="text" name="nome" id="nome" placeholder="Insira o seu nome completo" size="30"> 
+                
+                <br><br>
+
+                <field>
+                    <legend>Você irá ao evento?</legend>
+                    <input type="radio" name="confirmacao" id="sim" value="sim">
+                    <label for="sim">Sim</label>
+        
+                    <input type="radio" name="confirmacao" id="nao" value="nao">
+                    <label for="nao">Não</label>
+                </field>
+
+                <br><br>
+                
+                <label for="quantidade_adultos">Quantidade de adultos incluido você:</label>
+                <select name="quantidade_adultos" id="quantidade_adultos">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>  
+                </select>
+               
+                    <div id="acompanhante"></div>
+                <br><br>
+
+                <label for="quantidade_crianca">Quantidade de crianças:</label>
+                <select name="quantidade_crianca" id="quantidade_crianca">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+
+                    <div id="crianca"></div>
+
+                <br><br>
+        
+                <label for="email"><i>E-mail</i>:</label>
+                <input type="email" name="email" id="email" placeholder="exemplo@gmail.com" size="30">
+
+                <br><br>
+        
+                <label for="telefone">Telefone:</label>
+                <input type="tel" name="telefone" id="telefone" placeholder="(11) 91234-5678" size="15">
+
+                <br><br>
+
+                <label for="observacoes">Observações:</label>
+                <input type="text" name="observacoes" id="observacoes" size="15">
+
+                <br><br>
+                 
+                <input type="checkbox" id="newsletter" name="newsletter" value="sim">
+                <label for="newsletter">Declaro que tive acesso, li e concordo com os Termos de uso e Política de Privacidade do Site</label>
+
+                <br><br>
+                
+                <button type="submit" id="confirmar_presenca">Confirmar presença</button>
+                
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
