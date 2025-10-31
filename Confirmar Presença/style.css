@@ -1,0 +1,38 @@
+.fundo_presenca{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 60vh;
+width: 100%;
+text-align: center;
+background-color: rgb(193, 163, 221);
+margin: 0;
+padding: 0;
+overflow: hidden;
+}
+
+.confirmar_presenca{
+width: 40vw;
+height: 50vh;
+background-color: blueviolet;
+border-radius: 8px;
+text-align: center;
+justify-content: flex-start;
+overflow: auto;
+}
+
+.corpo_site{
+ margin: 0;
+}
+
+.acompanhante input{
+margin-bottom: 15px;
+width: 15vw;
+}
+
+.crianca input{
+margin-bottom: 15px;
+width: 15vw;
+}
+
