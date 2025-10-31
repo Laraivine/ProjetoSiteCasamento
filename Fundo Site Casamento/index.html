@@ -19,7 +19,7 @@
     <div class="fundo">
         <div class="boximage">
             <h1>Martha Barbosa e Odilon Neto</h1>
-            <div class="h2font">
+            <div class="fontLato">
                 <h5>10 DE JANEIRO DE 2026</h5>
             </div>
         </div>
@@ -32,12 +32,16 @@
                     <div class="sdn-pagina-conteudo pagina-cerimonia">
 
                         <div class="content-box heading">
-                            <h2 class="sdn-titulo-pagina">Cerimônia</h2>
+                            <div class="fontLarger">
+                               <h1 class="sdn-titulo-pagina">Cerimônia</h1>
+                            </div>
                         </div>
 
                         <div class="content-box wysiwyg">
-                            <p>Nossa cerimônia de casamento será realizada às 15h na paróquia de São José, R. Pres.
-                                Tancredo de Almeida Neves, 197 - Alto do Cruzeiro, Arapiraca - AL, 57312-260.</p>
+                            <div class="fontLato">
+                                <p>Nossa cerimônia de casamento será realizada às 15h na paróquia de São José, R. Pres.
+                                    Tancredo de Almeida Neves, 197 - Alto do Cruzeiro, Arapiraca - AL, 57312-260.</p>
+                            </div>
                         </div>
 
                         <div class="content-box resp_wrapper_16_9">
@@ -59,14 +63,18 @@
                     <div class="sdn-pagina-conteudo pagina-recepcao">
                         <div ng-controller="adminPagePhotoController as vm">
                             <div class="content-box heading">
-                                <h2 class="sdn-titulo-pagina">
-                                    Recepção
-                                </h2>
+                                <div class="fontLarger">
+                                    <h1 class="sdn-titulo-pagina">
+                                        Recepção
+                                    </h1>
+                                </div>
                             </div>
                             <div class="content-box wysiwyg">
-                                <p>Em seguida, nossa recepção será no Espaço D&apos;Luz Festas, localizado na R. Afra
-                                    Correia
-                                    Barbosa, 135 - São Luiz I, Arapiraca - AL, 57301-393.</p>
+                                <div class="fontLato">
+                                    <p>Em seguida, nossa recepção será no Espaço D&apos;Luz Festas, localizado na R. Afra
+                                        Correia
+                                        Barbosa, 135 - São Luiz I, Arapiraca - AL, 57301-393.</p>
+                                </div>
                             </div>
                             <div class="content-box resp_wrapper_16_9">
                                 <iframe
@@ -83,9 +91,14 @@
         <h2>Lista de presentes</h2>
         <h2>Confirmar presença</h2>
     </div>
-    <audio controls>
-        <source src="Build.mp3" type="audio/mpeg">
-    </audio>
+    <div class="player">
+        <button id="playButton">
+          🎵 ▶️
+        </button>
+        <audio id="audio" src="Build.mp3"></audio>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 
 </html>
