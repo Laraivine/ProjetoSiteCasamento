@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
+
 <body class="corpo_site">
     <header class="menu">
         <h4>Cerimônia</h4>
@@ -21,8 +23,63 @@
                 <h5>10 DE JANEIRO DE 2026</h5>
             </div>
         </div>
-        <h2>Cerimônia</h2>
-        <h2>Recepção</h2>
+
+        <!-- Cerimônia (arquivo parcial) -->
+        <a id="cerimonia" name="cerimonia"></a>
+        <div class="sdn-one-page-section section-4 section-cerimonia">
+            <div class="section-wrap">
+                <div class="section-content container">
+                    <div class="sdn-pagina-conteudo pagina-cerimonia">
+
+                        <div class="content-box heading">
+                            <h2 class="sdn-titulo-pagina">Cerimônia</h2>
+                        </div>
+
+                        <div class="content-box wysiwyg">
+                            <p>Nossa cerimônia de casamento será realizada às 15h na paróquia de São José, R. Pres.
+                                Tancredo de Almeida Neves, 197 - Alto do Cruzeiro, Arapiraca - AL, 57312-260.</p>
+                        </div>
+
+                        <div class="content-box resp_wrapper_16_9">
+                            <iframe
+                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDF4VgbU9xWjttw7ebXRURtpNvvPpIB_eM&q=place_id:ChIJS-QfFRjVBQcR_2cW6cm3r_w&attribution_source=Casar.com"
+                                width="600" height="450" frameborder="0" style="border:0"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recepção-->
+        <a id="recepcao" name="recepcao"></a>
+        <div class="sdn-one-page-section section-5 section-recepcao">
+            <div class="section-wrap">
+                <div class="section-content container">
+                    <div class="sdn-pagina-conteudo pagina-recepcao">
+                        <div ng-controller="adminPagePhotoController as vm">
+                            <div class="content-box heading">
+                                <h2 class="sdn-titulo-pagina">
+                                    Recepção
+                                </h2>
+                            </div>
+                            <div class="content-box wysiwyg">
+                                <p>Em seguida, nossa recepção será no Espaço D&apos;Luz Festas, localizado na R. Afra
+                                    Correia
+                                    Barbosa, 135 - São Luiz I, Arapiraca - AL, 57301-393.</p>
+                            </div>
+                            <div class="content-box resp_wrapper_16_9">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3931.9488665073636!2d-36.64809812391875!3d-9.770394303705919!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x705d5cf0c344d29%3A0x55383ffb596847a7!2sD&#39;Luz%20Festas!5e0!3m2!1spt-BR!2sbr!4v1761832842351!5m2!1spt-BR!2sbr"
+                                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <h2>Lista de presentes</h2>
         <h2>Confirmar presença</h2>
     </div>
@@ -30,4 +87,5 @@
         <source src="Build.mp3" type="audio/mpeg">
     </audio>
 </body>
+
 </html>
