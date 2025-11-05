@@ -14,7 +14,7 @@ overflow: hidden;
 
 .confirmar_presenca{
 width: 40vw;
-height: 50vh;
+height: 500vh;
 background-color: blueviolet;
 border-radius: 8px;
 text-align: center;
@@ -36,3 +36,8 @@ margin-bottom: 15px;
 width: 15vw;
 }
 
+.mesagem{
+margin-top: 15px;
+font-weight: bold;
+color: black;
+}
