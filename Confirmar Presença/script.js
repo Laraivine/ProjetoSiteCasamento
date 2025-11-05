@@ -7,33 +7,26 @@ const nomeConfirmacao = document.getElementById('nome')
 const emailConfirmacao = document.getElementById('email')
 const form = document.getElementById("form");
 const observacao = document.getElementById("observacoes");
+const mensagemConfirmacao = document.getElementById("mensagem");
 
 function confirmarPresenca(event) {
-
-    event.preventDefault();
-
+ event.preventDefault();
     let nomesAcompanhantes = "Nenhum";
-    // Seleciona TODOS os inputs que têm a classe 'nome_acompanhante_input'
     const acompanhantesInputs = document.querySelectorAll('.nome_acompanhante_input');
-    
     if (acompanhantesInputs.length > 0) {
-        // Converte a lista de inputs para um Array, pega o valor de cada um e junta com vírgula.
         nomesAcompanhantes = Array.from(acompanhantesInputs)
-                                  .map(input => input.value)
-                                  .filter(value => value.trim() !== '') // Remove vazios, se houver
-                                  .join(', ');
+            .map(input => input.value)
+            .filter(value => value.trim() !== '') 
+            .join(', ');
     }
 
     let nomesCriancas = "Nenhum";
-    // Seleciona TODOS os inputs que têm a classe 'nome_crianca_input'
     const criancasInputs = document.querySelectorAll('.nome_crianca_input');
-    
     if (criancasInputs.length > 0) {
-        // Converte a lista de inputs para um Array, pega o valor de cada um e junta com vírgula.
         nomesCriancas = Array.from(criancasInputs)
-                             .map(input => input.value)
-                             .filter(value => value.trim() !== '') // Remove vazios, se houver
-                             .join(', ');
+            .map(input => input.value)
+            .filter(value => value.trim() !== '') 
+            .join(', ');
     }
 
     const confirmacaoValue = document.querySelector('input[name="confirmacao"]:checked') ? 
@@ -67,17 +60,17 @@ function confirmarPresenca(event) {
         Observacao: observacao,
 
         }).then(function(response) {
-            alert('Presença confirmada com sucesso! Obrigado!');
-            form.reset(); 
+            mensagemConfirmacao.textContent = 'Sua presença foi confirmada e enviada aos noivos!'
+             mensagemConfirmacao.style.display = 'block';
+            form.reset();
         }, function(error) {
-            alert('Ocorreu um erro ao confirmar a presença. Por favor, tente novamente.');
+            mensagemConfirmacao.textContent = 'Ocorreu um erro ao confirmar sua presença. Por favor tente novamente.'
+             mensagemConfirmacao.style.display = 'block';
             console.error('Falha no envio:', error);
     });     
 }
 
 form.addEventListener('submit', confirmarPresenca);
-//form.addEventListener("submit", logSubmit);
-
 
 function atualizarAcompanhantes(){ 
     const totalAdultos = parseInt(quantAdultos.value); 
@@ -117,4 +110,3 @@ quantAdultos.addEventListener('change', atualizarAcompanhantes);
 atualizarAcompanhantes();
 quantCriancas.addEventListener('change', atualizarCriancas);
 atualizarCriancas();
-
