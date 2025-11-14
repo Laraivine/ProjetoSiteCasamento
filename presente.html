@@ -323,14 +323,14 @@
         </div>
 
         <div class="card" data-preco="54.44">
-          <img src="fotosPresentes/conjuntoprato.webp" alt="Conjunto Pratos Porcelana" class="gift-image" />
+          <img src="fotosPresentes/conjuntoPratos.jpg" alt="Conjunto Pratos Porcelana" class="gift-image" />
           <h3 class="gift-title">Conjunto Pratos Porcelana</h3>
           <p class="gift-price">R$ 253,44</p>
           <button class="gift-button">Presentear</button>
         </div>
 
         <div class="card" data-preco="54.44">
-          <img src="fotosPresentes/xicara.png" alt="Conjunto de Xícaras Vermelhas 6 Peças" class="gift-image" />
+          <img src="fotosPresentes/" alt="Conjunto de Xícaras Vermelhas 6 Peças" class="gift-image" />
           <h3 class="gift-title">Conjunto de Xícaras Vermelhas 6 Peças</h3>
           <p class="gift-price">R$ 54,44</p>
           <button class="gift-button">Presentear</button>
@@ -386,7 +386,7 @@
         </div>
 
         <div class="card" data-preco="404.21">
-          <img src="fotosPresentes/soudbar.jpeg" alt="Soundbar Bluetooth Mondial" class="gift-image" />
+          <img src="fotosPresentes/" alt="Soundbar Bluetooth Mondial" class="gift-image" />
           <h3 class="gift-title">Soundbar Bluetooth Mondial</h3>
           <p class="gift-price">R$ 404,21</p>
           <button class="gift-button">Presentear</button>
@@ -594,5 +594,43 @@ const ordenarSelect = document.getElementById("ordenar");
         cartSection.classList.remove("hidden");
       });
     </script>
+
+    <script>
+// Função que testa uma imagem carregando ela manualmente
+function testarImagem(src) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve({ src, ok: true });
+    img.onerror = () => resolve({ src, ok: false });
+    img.src = src + "?cache=" + Math.random(); // evita cache
+  });
+}
+
+async function verificarImagens() {
+  const imagens = Array.from(document.querySelectorAll("img"));
+  const resultados = [];
+
+  for (const img of imagens) {
+    const src = img.getAttribute("src");
+    const resultado = await testarImagem(src);
+    resultados.push(resultado);
+  }
+
+  console.log("%c🔍 Resultado do Teste de Imagens:", "font-size:16px; font-weight:bold;");
+
+  resultados.forEach(r => {
+    if (r.ok) {
+      console.log("%c✔ OK: " + r.src, "color:green;");
+    } else {
+      console.log("%c❌ QUEBRADA: " + r.src, "color:red; font-weight:bold;");
+    }
+  });
+
+  console.log("%cTeste concluído!", "font-size:14px; color:blue;");
+}
+
+document.addEventListener("DOMContentLoaded", verificarImagens);
+</script>
+
   </body>
 </html>
