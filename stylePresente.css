@@ -2,14 +2,14 @@ body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
-  background-color: #fcfbfb;
+  background-color: #e6e6fa;
   color: #2b2b2b;
   text-align: center;
 }
 
 /* Container geral centraliza todo o conteúdo */
 .container-geral {
-  max-width: 800px; /* diminui para aproximar as colunas */
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -35,7 +35,7 @@ body {
 /* Barra superior */
 .top-bar {
   display: flex;
-  flex-direction: row; /* deixa o botão e o select empilhados */
+  flex-direction: row; 
   align-items: center;
   justify-content: space-around;
   gap: 10px;
@@ -44,7 +44,7 @@ body {
 
 /* Botão do carrinho */
 .cart {
-  background-color: #ddb8e1;
+  background-color: #a794d6; /* Lilás suave */
   border: none;
   border-radius: 50px;
   padding: 12px 26px;
@@ -53,7 +53,7 @@ body {
   cursor: pointer;
 }
 
-/* Ordenação (fica abaixo do carrinho) */
+/* Ordenação */
 .sort {
   display: flex;
   align-items: center;
@@ -71,12 +71,12 @@ select {
 /* Cards dos presentes */
 .container {
   display: flex;
-  gap: 50px; /* espaço pequeno entre colunas */
+  gap: 50px; 
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 20px;  
-  width: 1200px;
+  max-width: 1200px;
 }
 
 .gift-container{
@@ -85,12 +85,11 @@ select {
   justify-content: center;
 }
 
-
 .card {
   margin: 0;
   width: 100%;
-  max-width: 280px; /* um pouco mais largo para preencher melhor */
-  background: #ead3e8;
+  max-width: 280px;
+  background: #fffeff; /* Lilás muito suave (base da carta) */
   border-radius: 20px;
   box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.06);
   padding: 16px;
@@ -127,7 +126,7 @@ select {
   padding: 12px;
   border: none;
   border-radius: 50px;
-  background-color: #cc71ed;
+  background-color: #a794d6; /* Lilás principal */
   color: white;
   font-size: 14px;
   font-weight: 500;
@@ -136,7 +135,7 @@ select {
 }
 
 .gift-button:hover {
-  background-color: #b95edc;
+  background-color: #aa5edc;
 }
 
 /* Carrinho */
@@ -191,7 +190,7 @@ select {
 }
 
 .remove {
-  color: #d9534f;
+  color: #c067ccb9;
   text-decoration: underline;
   cursor: pointer;
   font-size: 14px;
@@ -205,7 +204,7 @@ select {
 
 .cart-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Botões empilhados no carrinho */
   gap: 10px;
   margin-top: 20px;
 }
@@ -225,14 +224,100 @@ select {
   color: #fff;
 }
 
-.btn-pink {
-  background: #d97b95;
+/* --- AJUSTES DE CORES GERAIS (Lilás/Lavanda) --- */
+
+/* Cor principal (Lilás/Roxo) */
+.btn-pink,
+#irParaPagamento { /* Botão de pagamento e outros botões principais */
+  background: #a794d6; 
   color: #fff;
 }
 
-.footerRodapé {
+.btn-pink:hover,
+#irParaPagamento:hover {
+  background: #aa5edc; /* Lilás um pouco mais escuro no hover */
+}
+
+/* Botão cinza (voltar/adicionar mais) */
+.btn-gray,
+#voltarCarrinho {
+  background: #6c757d; /* Cinza */
+  color: #fff;
+}
+
+.btn-gray:hover,
+#voltarCarrinho:hover {
+  background: #5a6268;
+}
+
+/* --- ESTILO PARA A TELA DE RESUMO DA COMPRA (CORRIGIDO) --- */
+
+#resumoSection {
+  /* 1. Largura estreita (como o carrinho) */
+  max-width: 400px;
+  margin: 20px auto;
+  background: #fff; 
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  text-align: left;
+}
+
+/* 3. Fonte bonita para o título do Resumo */
+#resumoSection h2 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2em; 
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.resumo-box {
+  border: 1px solid #ead3e8; /* Borda levemente lilás */
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.linha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 1em;
+}
+
+.linha span:last-child {
+  font-weight: bold;
+  color: #2b2b2b;
+}
+
+.linha.total {
+  border-top: 1px dashed #a794d6; /* Linha tracejada lilás */
+  margin-top: 10px;
+  padding-top: 10px;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #a794d6; /* Total final em lilás */
+}
+
+/* 2. Botões empilhados (Volta a ser como o carrinho) */
+.botoes-resumo a {
+  display: flex;
+  flex-direction: column; /* Empilha os botões */
+  gap: 10px;
   margin-top: 20px;
-  font-size: 13px;
-  color: #777;
-  padding-bottom: 20px;
+  text-decoration: none; /* 🎯 REMOVE O SUBINHALDO */
+  font-family: sans-serif; /* 🎯 GARANTE A FONTE CORRETA */
+  text-align: center;
+}
+
+.botoes-resumo button {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1em;
+  border-radius: 50px; /* Volta ao arredondado */
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
 }

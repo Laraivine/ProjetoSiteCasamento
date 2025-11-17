@@ -79,7 +79,7 @@ body {
     align-items: center;
     width: 100%;
     min-height: 80vh;
-    background-image: url("imagemcasamento2.0.jpg");
+    background-image: url("imagemcasamento2.0.png");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -605,5 +605,170 @@ button[type="submit"]:hover {
     button[type="submit"]:hover {
         transform: none;
     }
-
 }
+
+/* --- Estilos do Hamburguer --- */
+.hamburger {
+    display: none; /* Começa escondido, será exibido no mobile */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001; /* Acima do menu */
+}
+
+.bar {
+    display: block;
+    width: 100%;
+    height: 4px;
+    margin: 6px 0;
+    background-color: var(--cor-roxo-escuro);
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+/* Transição do ícone para o "X" */
+.menu-open .bar:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.menu-open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-open .bar:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+
+/* --- Menu no Mobile (Padrão: Escondido) --- */
+@media (max-width: 767px) {
+    /* Exibir o botão do hamburguer */
+    .hamburger {
+        display: block;
+    }
+
+    /* Estilos do menu mobile */
+    .menu {
+        /* Desfaz o layout flex horizontal para mobile */
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
+        /* Posicionamento fixo na lateral/topo */
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 60%; /* Largura do menu aberto */
+        max-width: 300px;
+        padding-top: 100px; /* Espaço para o botão de fechar */
+        
+        /* Oculta o menu inicialmente */
+        transform: translateX(100%);
+        transition: transform 0.3s ease-in-out;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+        
+        /* Altura do header no mobile */
+        min-height: auto; 
+    }
+
+    /* Estilo de quando o menu está aberto */
+    .menu.active {
+        transform: translateX(0); /* Mostra o menu */
+    }
+    
+    .menu a {
+        padding: 15px 20px;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .menu a:last-child {
+        border-bottom: none;
+    }
+
+    /* Oculta a lista de links no mobile, e ajusta a altura do header */
+    .header {
+        height: var(--menu-height); /* Usa a altura padrão do header */
+    }
+}
+
+/* Modificações nas media queries existentes (Remova as regras de menu) */
+@media (max-width: 480px) {
+    :root {
+        --menu-height: 80px; /* Altura menor, já que o menu fica escondido */
+    }
+    /* Remova as regras anteriores que manipulavam o menu no mobile, como: */
+    /*
+    .menu {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 10px;
+        min-height: 150px;
+    }
+    .menu a {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+    */
+}
+
+@media (min-width: 768px) {
+    /* Garante que o menu esteja sempre visível em telas maiores */
+    .menu {
+        transform: translateX(0) !important;
+        position: relative;
+        height: auto;
+        padding-top: 20px;
+        width: 100%;
+        box-shadow: none;
+    }
+    /* Oculta o botão do hamburguer no desktop */
+    .hamburger {
+        display: none;
+    }
+}
+
+.icon {
+    width: 120px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  .icon-top {
+    width: 100px;
+    margin-bottom: 30px;
+    opacity: 0.7;
+  }
+
+  /* Estilos para o Wrapper e o Iframe da Lista de Presentes */
+.presentes-wrapper {
+    /* Define uma altura mínima ou uma porcentagem da altura do pai se for preciso. */
+    /* Você pode precisar ajustar esta altura */
+    min-height: 1000px; 
+    width: 100%;
+}
+
+#lista-iframe {
+    width: 100%;
+    /* ⚠️ IMPORTANTE: Ajuste esta altura! 
+       Se a lista for muito grande, o iframe terá barra de rolagem, 
+       ou você pode tentar um valor bem alto (ex: 2000px) */
+    height: 1000px; 
+    border: none;
+    display: block;
+}
+
+/* Opcional: Se precisar que o container da lista de presentes não tenha padding interno excessivo */
+/* .secao-presentes .container .preto {
+    padding: 0;
+} */
