@@ -14,6 +14,25 @@
         border: 0;
         overflow: hidden;
       }
+      .presentes-wrapper { position: relative; }
+      .presentes-loader {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.9);
+        z-index: 5;
+      }
+      .presentes-loader .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(0,0,0,0.1);
+        border-top-color: var(--cor-roxo-escuro);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin { to { transform: rotate(360deg); } }
     </style>
     <script
       type="text/javascript"
@@ -162,6 +181,9 @@
             <h1>Lista de presentes</h1>
 
             <div class="presentes-wrapper">
+              <div class="presentes-loader" id="presentes-loader">
+                <div class="spinner"></div>
+              </div>
               <iframe
                 src="presente.html"
                 id="lista-iframe"
@@ -313,18 +335,60 @@
       (function () {
         const iframe = document.getElementById('lista-iframe');
         if (!iframe) return;
-        function resizeIframe() {
-          try {
-            const doc = iframe.contentDocument || iframe.contentWindow.document;
-            const height = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight);
-            iframe.style.height = height + 'px';
-          } catch (e) {
-            console.warn('Não foi possível acessar o iframe (cross-origin).', e);
-          }
+        const loader = document.getElementById('presentes-loader');
+
+        function hideLoader() {
+          if (loader) loader.style.display = 'none';
         }
-        iframe.addEventListener('load', resizeIframe);
+        function showLoader() {
+          if (loader) loader.style.display = 'flex';
+        }
+
+        // Tenta ajustar a altura várias vezes até estabilizar (ou até timeout)
+        function attemptResize(retries = 5, delay = 200) {
+          if (!iframe) return;
+          showLoader();
+          let lastHeight = 0;
+          let attempts = 0;
+
+          function doTry() {
+            attempts++;
+            try {
+              const doc = iframe.contentDocument || iframe.contentWindow.document;
+              const height = Math.max(doc.documentElement.scrollHeight || 0, doc.body.scrollHeight || 0);
+              if (height && Math.abs(height - lastHeight) <= 2) {
+                iframe.style.height = height + 'px';
+                hideLoader();
+                return;
+              }
+              if (height) {
+                iframe.style.height = height + 'px';
+                lastHeight = height;
+              }
+            } catch (e) {
+              // cross-origin ou erro de acesso — não podemos mais ajustar
+              hideLoader();
+              return;
+            }
+
+            if (attempts < retries) {
+              setTimeout(doTry, delay);
+            } else {
+              // fallback: esconde loader após tentativas
+              hideLoader();
+            }
+          }
+
+          doTry();
+        }
+
+        iframe.addEventListener('load', () => {
+          attemptResize(8, 250);
+        });
+
+        // Reajusta ao redimensionar a janela
         window.addEventListener('resize', () => {
-          setTimeout(resizeIframe, 200);
+          setTimeout(() => attemptResize(3, 200), 200);
         });
       })();
     </script>
