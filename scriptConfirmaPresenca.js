@@ -1,153 +1,146 @@
-const quantAdultos = document.getElementById('quantidade_adultos'); 
-const nomeAcompanhante = document.getElementById('acompanhante'); 
-const quantCriancas = document.getElementById('quantidade_crianca');
-const nomeCriancas = document.getElementById('crianca'); 
-const telefoneConfirmacao = document.getElementById('telefone')
-const nomeConfirmacao = document.getElementById('nome')
-const emailConfirmacao = document.getElementById('email')
-const form = document.getElementById("form");
-const observacao = document.getElementById("observacoes");
-const mensagemConfirmacao = document.getElementById("mensagem");
+// scriptConfirmaPresenca.js — versão robusta sem logs
 
 function confirmarPresenca(event) {
-
     event.preventDefault();
 
-    let nomesAcompanhantes = "Nenhum";
-    // Seleciona TODOS os inputs que têm a classe 'nome_acompanhante_input'
+    const form = document.getElementById('form');
+    if (!form) return;
+
+    const telefoneConfirmacao = document.getElementById('telefone');
+    const nomeConfirmacao = document.getElementById('nome');
+    const emailConfirmacao = document.getElementById('email');
+    const observacao = document.getElementById('observacoes');
+    const mensagemConfirmacao = document.getElementById('mensagem');
+    const quantAdultos = document.getElementById('quantidade_adultos');
+    const quantCriancas = document.getElementById('quantidade_crianca');
+
+    // Coleta acompanhantes
+    let nomesAcompanhantes = 'Nenhum';
     const acompanhantesInputs = document.querySelectorAll('.nome_acompanhante_input');
-    
     if (acompanhantesInputs.length > 0) {
-        // Converte a lista de inputs para um Array, pega o valor de cada um e junta com vírgula.
         nomesAcompanhantes = Array.from(acompanhantesInputs)
-                                  .map(input => input.value)
-                                  .filter(value => value.trim() !== '') // Remove vazios, se houver
-                                  .join(', ');
+            .map(input => input.value)
+            .filter(v => v && v.trim() !== '')
+            .join(', ');
     }
 
-    let nomesCriancas = "Nenhum";
-    // Seleciona TODOS os inputs que têm a classe 'nome_crianca_input'
+    // Coleta crianças
+    let nomesCriancas = 'Nenhum';
     const criancasInputs = document.querySelectorAll('.nome_crianca_input');
-    
     if (criancasInputs.length > 0) {
-        // Converte a lista de inputs para um Array, pega o valor de cada um e junta com vírgula.
         nomesCriancas = Array.from(criancasInputs)
-                             .map(input => input.value)
-                             .filter(value => value.trim() !== '') // Remove vazios, se houver
-                             .join(', ');
+            .map(input => input.value)
+            .filter(v => v && v.trim() !== '')
+            .join(', ');
     }
 
-    const confirmacaoValue = document.querySelector('input[name="confirmacao"]:checked') ? 
-        document.querySelector('input[name="confirmacao"]:checked').value : 'Não preenchido';
-    const obsValue = document.getElementById('observacoes').value.trim() || 'Nenhuma';
+    const confirmacaoValue = (document.querySelector('input[name="confirmacao"]:checked') || {}).value || 'Não preenchido';
+    const obsValue = (observacao && observacao.value && observacao.value.trim()) || 'Nenhuma';
 
+    const message = `Olá, Martha e Odilon!\n\n${(nomeConfirmacao && nomeConfirmacao.value) || ''} acaba de ${(confirmacaoValue === 'sim') ? 'CONFIRMAR a' : 'NEGAR a'} presença no seu casamento!\n\nEsses são os dados que ${(nomeConfirmacao && nomeConfirmacao.value) || ''} preencheu:\n  Telefone: ${(telefoneConfirmacao && telefoneConfirmacao.value) || ''}\n  E-mail: ${(emailConfirmacao && emailConfirmacao.value) || ''}\n  Quantidade de adultos: ${(quantAdultos && quantAdultos.value) || ''}\n  Nomes dos acompanhantes adultos: ${nomesAcompanhantes}\n  Quantidade de crianças: ${(quantCriancas && quantCriancas.value) || ''}\n  Nomes das crianças: ${nomesCriancas}\n  Observação: ${obsValue}\n`;
 
-    let message = ` Olá, Martha e Odilon!\n
-    ${nomeConfirmacao.value} acaba de ${confirmacaoValue === 'sim' ? 'CONFIRMAR a' : 'NEGAR a'} presença no seu casamento!
-    
-    Esses são os dados que ${nomeConfirmacao.value} preencheu: 
-      Telefone: ${telefoneConfirmacao.value}
-      E-mail: ${emailConfirmacao.value}
-      Quantidade de adultos (Incluindo ${nomeConfirmacao.value}): ${quantAdultos.value}
-      Nomes dos acompanhantes adultos: ${nomesAcompanhantes}
-      Quantidade de crianças: ${quantCriancas.value}
-      Nomes das crianças: ${nomesCriancas}
-      Observação: ${observacao.value}
-      
-                     `
-    emailjs.send("service_casamento", "template_bdzwr62",{
-        title: "Confirmação de Presença",
-        name: nomeConfirmacao.value,
-        message,
-        email: emailConfirmacao.value,
-        telefone: telefoneConfirmacao.value,
-        Quantidadedeadultos: quantAdultos.value,
-        Nomedosacompanhantes: nomesAcompanhantes,
-        Quantidadedecriancas: quantCriancas.value,
-        Nomedascriancas: nomesCriancas,
-        Observacao: observacao.value, // Corrigi para garantir que o valor do input é enviado
-
-        }).then(function(response) {
-            mensagemConfirmacao.textContent = 'Sua presença foi confirmada e enviada aos noivos!'
-             mensagemConfirmacao.style.display = 'block';
+    // Envio via emailjs se disponível
+    if (typeof emailjs !== 'undefined' && emailjs.send) {
+        emailjs.send('service_casamento', 'template_bdzwr62', {
+            title: 'Confirmação de Presença',
+            name: (nomeConfirmacao && nomeConfirmacao.value) || '',
+            message,
+            email: (emailConfirmacao && emailConfirmacao.value) || '',
+            telefone: (telefoneConfirmacao && telefoneConfirmacao.value) || '',
+            Quantidadedeadultos: (quantAdultos && quantAdultos.value) || '',
+            Nomedosacompanhantes: nomesAcompanhantes,
+            Quantidadedecriancas: (quantCriancas && quantCriancas.value) || '',
+            Nomedascriancas: nomesCriancas,
+            Observacao: obsValue,
+        }).then(function () {
+            if (mensagemConfirmacao) {
+                mensagemConfirmacao.textContent = 'Sua presença foi confirmada e enviada aos noivos!';
+                mensagemConfirmacao.style.display = 'block';
+            }
             form.reset();
-        }, function(error) {
-            mensagemConfirmacao.textContent = 'Ocorreu um erro ao confirmar sua presença. Por favor tente novamente.'
-             mensagemConfirmacao.style.display = 'block';
-            console.error('Falha no envio:', error);
-    });     
+        }, function () {
+            if (mensagemConfirmacao) {
+                mensagemConfirmacao.textContent = 'Ocorreu um erro ao confirmar sua presença. Por favor tente novamente.';
+                mensagemConfirmacao.style.display = 'block';
+            }
+        });
+    } else {
+        // Se emailjs não estiver disponível, apenas exibe mensagem local
+        if (mensagemConfirmacao) {
+            mensagemConfirmacao.textContent = 'Confirmação pronta, mas o serviço de envio não está disponível.';
+            mensagemConfirmacao.style.display = 'block';
+        }
+    }
 }
 
-form.addEventListener('submit', confirmarPresenca);
-//form.addEventListener("submit", logSubmit);
+function atualizarAcompanhantes() {
+    const quantAdultos = document.getElementById('quantidade_adultos');
+    const nomeAcompanhante = document.getElementById('acompanhante');
+    if (!quantAdultos || !nomeAcompanhante) return;
 
+    const totalAdultos = parseInt(quantAdultos.value) || 1;
+    const numeroAcompanhantes = Math.max(0, totalAdultos - 1);
+    nomeAcompanhante.innerHTML = '';
 
-function atualizarAcompanhantes(){ 
-    const totalAdultos = parseInt(quantAdultos.value); 
-    const numeroAcompanhantes = totalAdultos - 1; 
-    nomeAcompanhante.innerHTML = ''; 
-    
-    for(let i = 1; i <= numeroAcompanhantes; i++){
+    for (let i = 1; i <= numeroAcompanhantes; i++) {
         const divAcompanhante = document.createElement('div');
         divAcompanhante.classList.add('acompanhante');
         const inputAcompanhante = document.createElement('input');
         inputAcompanhante.setAttribute('type', 'text');
         inputAcompanhante.classList.add('nome_acompanhante_input');
-        inputAcompanhante.setAttribute('name', `adulto${i}`); 
-        inputAcompanhante.setAttribute('placeholder', 'Nome completo do acompanhante'); 
+        inputAcompanhante.setAttribute('name', `adulto${i}`);
+        inputAcompanhante.setAttribute('placeholder', 'Nome completo do acompanhante');
         divAcompanhante.appendChild(inputAcompanhante);
         nomeAcompanhante.appendChild(divAcompanhante);
     }
 }
-function atualizarCriancas(){ 
-    const numeroCriancas = parseInt(quantCriancas.value); 
-    nomeCriancas.innerHTML = ''; 
 
-    for(let i = 1; i <= numeroCriancas; i++){
+function atualizarCriancas() {
+    const quantCriancas = document.getElementById('quantidade_crianca');
+    const nomeCriancas = document.getElementById('crianca');
+    if (!quantCriancas || !nomeCriancas) return;
+
+    const numeroCriancas = parseInt(quantCriancas.value) || 0;
+    nomeCriancas.innerHTML = '';
+
+    for (let i = 1; i <= numeroCriancas; i++) {
         const divCriancas = document.createElement('div');
         divCriancas.classList.add('crianca');
         const inputCriancas = document.createElement('input');
         inputCriancas.setAttribute('type', 'text');
         inputCriancas.classList.add('nome_crianca_input');
-        inputCriancas.setAttribute('name', `crianca${i}`); 
-        inputCriancas.setAttribute('placeholder', 'Nome completo da criança'); 
+        inputCriancas.setAttribute('name', `crianca${i}`);
+        inputCriancas.setAttribute('placeholder', 'Nome completo da criança');
         divCriancas.appendChild(inputCriancas);
         nomeCriancas.appendChild(divCriancas);
     }
 }
 
-quantAdultos.addEventListener('change', atualizarAcompanhantes);
-atualizarAcompanhantes();
-quantCriancas.addEventListener('change', atualizarCriancas);
-atualizarCriancas();
+// Inicialização quando DOM estiver pronto
+document.addEventListener('DOMContentLoaded', function () {
+    const quantAdultos = document.getElementById('quantidade_adultos');
+    if (quantAdultos) {
+        quantAdultos.addEventListener('change', atualizarAcompanhantes);
+        atualizarAcompanhantes();
+    }
 
+    const quantCriancas = document.getElementById('quantidade_crianca');
+    if (quantCriancas) {
+        quantCriancas.addEventListener('change', atualizarCriancas);
+        atualizarCriancas();
+    }
 
-//Script Fundo Site (Menu Hamburger)
+    const form = document.getElementById('form');
+    if (form) form.addEventListener('submit', confirmarPresenca);
 
-document.addEventListener('DOMContentLoaded', () => {
+    // Menu hamburger
     const hamburgerButton = document.getElementById('hamburger-button');
     const mainMenu = document.getElementById('main-menu');
     const header = document.querySelector('.header');
-    const menuLinks = mainMenu.querySelectorAll('a');
-
-    // Função para alternar o estado do menu
-    function toggleMenu() {
-        mainMenu.classList.toggle('active');
-        header.classList.toggle('menu-open');
-    }
-
-    // 1. Ouvinte de evento para o botão do hambúrguer
-    hamburgerButton.addEventListener('click', toggleMenu);
-
-    // 2. Ouvinte de evento para os links do menu (para fechar o menu após o clique)
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            // Verifica se o menu está ativo antes de fechar
-            if (mainMenu.classList.contains('active')) {
-                toggleMenu();
-            }
+    if (hamburgerButton && mainMenu) {
+        hamburgerButton.addEventListener('click', function () {
+            mainMenu.classList.toggle('active');
+            if (header) header.classList.toggle('menu-open');
         });
-    });
-
-    // A função carregarListaDePresentes() e sua chamada foram removidas daqui.
+    }
 });

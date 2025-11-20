@@ -654,34 +654,35 @@ button[type="submit"]:hover {
     }
 
     /* Estilos do menu mobile */
-    .menu {
-        /* Desfaz o layout flex horizontal para mobile */
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
+        .menu {
+            display: none !important;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
 
-        /* Posicionamento fixo na lateral/topo */
-        position: fixed;
-        top: 0;
-        right: 0;
-        height: 100vh;
-        width: 60%; /* Largura do menu aberto */
-        max-width: 300px;
-        padding-top: 100px; /* Espaço para o botão de fechar */
-        
-        /* Oculta o menu inicialmente */
-        transform: translateX(100%);
-        transition: transform 0.3s ease-in-out;
-        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
-        
-        /* Altura do header no mobile */
-        min-height: auto; 
-    }
+            /* Posicionamento fixo na lateral/topo */
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 60%; /* Largura do menu aberto */
+            max-width: 300px;
+            padding-top: 100px; /* Espaço para o botão de fechar */
+            
+            /* Oculta o menu inicialmente */
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            
+            /* Altura do header no mobile */
+            min-height: auto; 
+        }
 
     /* Estilo de quando o menu está aberto */
-    .menu.active {
-        transform: translateX(0); /* Mostra o menu */
-    }
+        .menu.active {
+            display: flex !important;
+            transform: translateX(0); /* Mostra o menu */
+        }
     
     .menu a {
         padding: 15px 20px;
