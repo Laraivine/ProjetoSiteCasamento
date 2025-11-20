@@ -7,6 +7,14 @@
 
     <link rel="stylesheet" href="styleFundo.css" />
     <link rel="stylesheet" href="styleConfirma.css" />
+    <style>
+      .presentes-wrapper iframe {
+        width: 100%;
+        display: block;
+        border: 0;
+        overflow: hidden;
+      }
+    </style>
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
@@ -300,5 +308,24 @@
     <script src="scriptFundo.js"></script>
     <script src="scriptConfirmaPresenca.js"></script>
     <script src="scriptMusica.js"></script>
+    <script>
+      (function () {
+        const iframe = document.getElementById('lista-iframe');
+        if (!iframe) return;
+        function resizeIframe() {
+          try {
+            const doc = iframe.contentDocument || iframe.contentWindow.document;
+            const height = Math.max(doc.documentElement.scrollHeight, doc.body.scrollHeight);
+            iframe.style.height = height + 'px';
+          } catch (e) {
+            console.warn('Não foi possível acessar o iframe (cross-origin).', e);
+          }
+        }
+        iframe.addEventListener('load', resizeIframe);
+        window.addEventListener('resize', () => {
+          setTimeout(resizeIframe, 200);
+        });
+      })();
+    </script>
   </body>
 </html>
