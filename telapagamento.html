@@ -84,7 +84,7 @@
         position: relative;
       }
 
-      .header {
+      .header-pagamento {
         background: linear-gradient(to right, #9d82bd, #9d82bd);
         color: white;
         text-align: center;
@@ -92,7 +92,7 @@
         position: relative;
       }
 
-      .header::before {
+      .header-pagamento::before {
         content: "";
         position: absolute;
         top: 0;
@@ -188,6 +188,19 @@
         transition: background-color 0.3s;
       }
 
+      .back-btn {        
+        border: 1px solid #907db4;
+        color: #907db4;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+        text-decoration: none;
+      }
+
       .copy-btn:hover {
         background-color: #9569a0;
       }
@@ -212,7 +225,7 @@
           font-size: 24px;
         }
       }
-    </style>
+    </style>    
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap"
       rel="stylesheet"
@@ -220,7 +233,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="header">
+      <div class="header-pagamento">
         <div class="names">Odilon <span class="ampersand">&</span> Martha</div>
         <div class="divider"></div>
       </div>
@@ -229,7 +242,7 @@
         <div class="pix-title">PAGUE COM PIX</div>
 
           <img
-            src="qr_code.jpeg"
+            src="imgs/qr_code.jpeg"
             alt="QR Code PIX para pagamento:"
             class="qrcode-img"
           />
@@ -256,6 +269,7 @@
           <div class="pix-key" id="pixKey">bp.martha98@gmail.com</div>
 
           <button class="copy-btn" id="copyBtn">Copiar Chave PIX</button>
+          <a href="presente.html" class="back-btn" id="backBtn">Voltar</a>
           <div class="success-message" id="successMessage">
             Chave PIX copiada com sucesso!
           </div>
